@@ -1,6 +1,75 @@
 <div id="main">
-  <%- @images.each do |image_url| -%>
-    <%= image_tag image_url, class: 'item' %>
+  <%- @pins.each_with_index do |pin, i| -%>
+    <div class="pin">
+      <div class="card">
+        <%= image_tag pin.image, class: 'card-image' %>
+        <div class="card-img-overlay">
+          <div class="text-right">
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#selectBoardModal<%= i %>">
+              <%= t '.re_pin_button' %>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal" id="selectBoardModal<%= i %>" data-backdrop="true" data-keyboard="true" tabindex="-1" aria-labelledby="selectBoardModalLabel<%= i %>" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header justify-content-center">
+              <h5 class="modal-title" id="selectBoardModalLabel<%= i %>">
+                <%= t '.select_board_modal.title' %>
+              </h5>
+            </div>
+            <div class="modal-body">
+              <% @my_boards.each do |board| %>
+                <%= simple_form_for board.re_pins.build do |f| -%>
+                  <%= f.input :board_id, as: :hidden -%>
+                  <%= f.input :pin_id, input_html: { value: pin.id }, as: :hidden -%>
+                  <%= f.button :button, type: :submit do -%>
+                    <%= board.name -%>
+                  <%- end -%>
+                <%- end -%>
+              <% end %>
+            </div>
+            <div class="modal-footer justify-content-center">
+              <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#createBoardModal<%= i %>">
+                <%= octicon 'plus' %>
+                <%= t '.select_board_modal.create_board_button' %>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal" id="createBoardModal<%= i %>" data-backdrop="true" data-keyboard="true" tabindex="-1" aria-labelledby="createBoardModalLabel<%= i %>" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header justify-content-center">
+              <h5 class="modal-title" id="createBoardModalLabel<%= i %>">
+                <%= t '.create_board_modal.title' %>
+              </h5>
+            </div>
+            <%= simple_form_for @new_board do |f| %>
+              <div class="modal-body text-left">
+                <%= f.input :name %>
+              </div>
+              <%= f.simple_fields_for :re_pins do |re_pin| %>
+                <%= re_pin.input :pin_id, input_html: { value: pin.id }, as: :hidden %>
+              <% end %>
+              <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-light badge-pill" data-dismiss="modal" data-toggle="modal" data-target="#selectBoardModal<%= i %>">
+                  <%= t '.create_board_modal.cancel_button' %>
+                </button>
+                <%= f.button :button, class: 'btn btn-danger badge-pill', type: :submit do %>
+                  <%= t '.create_board_modal.create_button' %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+    </div>
   <%- end -%>
 </div>
 

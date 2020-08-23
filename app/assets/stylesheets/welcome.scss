@@ -4,10 +4,34 @@
 
 #main {
   text-align: center;
-  padding:    15px 30px 30px;
-}
+  padding:    15px 70px 30px;
 
-.item {
-  border-radius: 15px;
-  margin-bottom: 30px;
+  .pin {
+    background-color: #333;
+    margin-bottom:    30px;
+    border:           none;
+
+    .card-img-overlay {
+      visibility: hidden;
+      padding:    10px;
+    }
+
+    &, img {
+      border-radius: 15px;
+    }
+
+    &:hover {
+      img {
+        opacity: 0.5;
+      }
+
+      .card-img-overlay {
+        visibility: visible;
+      }
+    }
+  }
+  .card {
+    border-radius: 15px;
+    break-inside:  avoid;
+  }
 }

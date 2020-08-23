@@ -4,3 +4,40 @@ ja:
       navbar:
         items:
           home_link: ホーム
+  boards:
+    create:
+      flash:
+        success: 保存しました
+  re_pins:
+    create:
+      flash:
+        success: 保存しました
+  welcome:
+    index:
+      re_pin_button: 保存
+      select_board_modal:
+        title: ボードに保存する
+        create_board_button: 新規ボードを作成
+      create_board_modal:
+        title: 新規ボードを作成する
+        cancel_button: キャンセル
+        create_button: 作成
+  activerecord:
+    models:
+      user: ユーザー
+      board: ボード
+      pin: ピン留め
+    attributes:
+      user:
+        name:   名前
+        boards: ボード
+      board:
+        name: 名前
+        user: 作成者
+        pins: ピン留め
+        note: 説明文
+      pin:
+        title:   タイトル
+        board:   ボード
+        note:    説明文
+        link_to: 移動先リンク

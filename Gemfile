@@ -49,3 +49,7 @@ gem "database_cleaner", "~> 1.8", :group => :test
 gem "rspec-rails", "~> 4.0", :group => :test
 
 gem "webdrivers", "~> 4.4", :group => :test
+
+gem "octicons_helper", "~> 10.0"
+
+gem "simple_form", "~> 5.0"
