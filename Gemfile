@@ -43,3 +43,7 @@ group :development do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+
+gem "cucumber-rails", "~> 2.1", :group => :test
+gem "database_cleaner", "~> 1.8", :group => :test
+gem "rspec-rails", "~> 4.0", :group => :test

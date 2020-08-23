@@ -1,0 +1,6 @@
+ja:
+  layouts:
+    application:
+      navbar:
+        items:
+          home_link: ホーム
