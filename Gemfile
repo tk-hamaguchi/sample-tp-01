@@ -47,3 +47,5 @@ end
 gem "cucumber-rails", "~> 2.1", :group => :test
 gem "database_cleaner", "~> 1.8", :group => :test
 gem "rspec-rails", "~> 4.0", :group => :test
+
+gem "webdrivers", "~> 4.4", :group => :test

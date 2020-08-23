@@ -1,2 +1,7 @@
-<h1>Welcome#index</h1>
-<p>Find me in app/views/welcome/index.html.erb</p>
+<div id="main">
+  <%- @images.each do |image_url| -%>
+    <%= image_tag image_url, class: 'item' %>
+  <%- end -%>
+</div>
+
+<%= javascript_pack_tag 'resize_column_count' %>
