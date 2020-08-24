@@ -1,24 +1,19 @@
-# README
+# サンプルアプリケーション
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+## 依存関係
 
-* Ruby version
+* ruby ~> 2.7.1
+* nodejs ~> v14.8
+* sqlite3
 
-* System dependencies
 
-* Configuration
+## Getting started
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+$ git clone https://github.com/tk-hamaguchi/sample-tp-01.git
+$ cd sample-tp-01
+$ bundle install
+$ bundle exec rake db:setup techpinterest:demodata:setup
+$ bundle exec rails s
+```
