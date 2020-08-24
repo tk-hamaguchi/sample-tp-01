@@ -55,3 +55,9 @@ end
 前提('下記のリピンが登録されていること:') do |table|
   RePin.create!(table.hashes)
 end
+
+ならば('データベースに下記のボードが登録されていない:') do |table|
+  table.hashes.each do |row|
+    expect(Board).not_to be_exist row
+  end
+end

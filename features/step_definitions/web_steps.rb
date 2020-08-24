@@ -149,3 +149,7 @@ end
 ならば('ピン留め[{int}]の画像が表示されている') do |int|
   expect(page).to have_selector "img[src$=\"#{URI.parse(url_for(Pin.find(int).image)).path}\"]"
 end
+
+もし('ユーザーがボードの編集ボタンをクリックする') do
+  click_button 'editBoardButton'
+end

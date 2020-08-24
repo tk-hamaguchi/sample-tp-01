@@ -3,6 +3,8 @@
   <%= @board.name %>
 </h1>
 
+<p class="text-center"><%= @board.note %></p>
+
 <div id="main">
   <%= render partial: 'commons/create_pin_dropdown' %>
 
@@ -13,8 +15,63 @@
           <%= octicon 'arrow-left' %>
         <% end %>
       </li>
-
+      <li class="mt-2">
+        <button type="button" id="editBoardButton" class="btn btn-light badge-pill shadow" data-toggle="modal" data-target="#editBoardModal">
+          <%= octicon 'pencil' %>
+        </button>
+      </li>
     </ul>
+  </div>
+
+  <div class="modal" id="editBoardModal" tabindex="-1" aria-labelledby="editBoardModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header justify-content-center">
+          <h5 class="modal-title" id="editBoardModalLabel">
+            <%= t '.edit_board_modal.title' %>
+          </h5>
+        </div>
+
+        <%= simple_form_for @board do |f| %>
+          <div class="modal-body text-left">
+            <%= f.input :name %>
+            <%= f.input :note %>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-light badge-pill" data-dismiss="modal" data-toggle="modal" data-target="#confirmDestroyModal">
+              <%= t '.edit_board_modal.delete_button' %>
+            </button>
+            <%= f.button :button, class: 'btn btn-danger badge-pill', type: :submit do %>
+              <%= t '.edit_board_modal.save_button' %>
+            <% end %>
+          </div>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="confirmDestroyModal" tabindex="-1" aria-labelledby="confirmDestroyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header justify-content-center">
+          <h5 class="modal-title" id="confirmDestroyModalLabel">
+            <%= t '.confirm_destroy_modal.title' %>
+          </h5>
+        </div>
+        <div class="modal-body text-left p-3">
+          <%= t '.confirm_destroy_modal.message' %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light badge-pill btn-block badge-pill" data-dismiss="modal" data-toggle="modal" data-target="#editBoardModal">
+            <%= t '.confirm_destroy_modal.cancel_button' %>
+          </button>
+          <%= button_to @board, action: :destroy, method: :delete, form_class:'w-100', class: 'btn btn-danger btn-block badge-pill' do %>
+            <%= t '.confirm_destroy_modal.destroy_button' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
 
   <%- (@board.pins + @board.re_pins.map(&:pin)).each_with_index do |pin, i| -%>

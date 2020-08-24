@@ -10,9 +10,25 @@ ja:
   boards:
     index:
       count_of: "%{name} : %{value} 件"
+    show:
+      edit_board_modal:
+        title: ボードを編集
+        save_button: 完了
+        delete_button: 削除
+      confirm_destroy_modal:
+        title: ボードを削除
+        message: ボードおよびボード内に保存したピンを削除すると復元できません！
+        cancel_button: キャンセル
+        destroy_button: 完全に削除する
     create:
       flash:
         success: 保存しました
+    update:
+      flash:
+        success: 保存しました
+    destroy:
+      flash:
+        success: 削除しました
   pins:
     new:
       save: 保存
