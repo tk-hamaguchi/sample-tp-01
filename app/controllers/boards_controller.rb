@@ -1,8 +1,10 @@
 class BoardsController < ApplicationController
   def index
+    @boards = current_user.boards
   end
 
   def show
+    @board = current_user.boards.includes(:pins, :re_pins).find(params[:id])
   end
 
   def create

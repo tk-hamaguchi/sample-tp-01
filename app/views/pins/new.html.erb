@@ -1,0 +1,28 @@
+<div class="card mx-auto mt-4" style="width: 800px;" >
+  <div class="card-body">
+    <%= simple_form_for @pin do |f| %>
+      <div class="input-group w-50 ml-auto">
+        <%= f.input_field :board_id, class: 'form-control custom-select bg-light', collection: current_user.boards, prompt: :translate %>
+        <div class="input-group-append">
+          <%= f.button :button, class: 'btn btn-danger', type: :submit do %>
+            <%= t '.save' %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="custom-file my-4">
+        <%= f.input_field :image, class: 'custom-file-input' %>
+        <%= f.label :image, class: 'custom-file-label', data: { browse: t('.file_input_button') } do %>
+          <%= t '.file_input_placeholder' %>
+        <% end %>
+      </div>
+
+      <%= f.input :title %>
+      <%= f.input :note %>
+      <%= f.input :link_to, as: :url %>
+
+    <% end %>
+  </div>
+</div>
+
+<%= javascript_pack_tag 'bs_custom_file_input' %>

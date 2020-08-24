@@ -4,7 +4,20 @@ ja:
       navbar:
         items:
           home_link: ホーム
+  commons:
+    create_pin_dropdown:
+      create_pin: ピンを作成する
   boards:
+    index:
+      count_of: "%{name} : %{value} 件"
+    create:
+      flash:
+        success: 保存しました
+  pins:
+    new:
+      save: 保存
+      file_input_placeholder: クリックして画像をアップロードする
+      file_input_button: ファイルを選択
     create:
       flash:
         success: 保存しました
@@ -41,3 +54,14 @@ ja:
         board:   ボード
         note:    説明文
         link_to: 移動先リンク
+  simple_form:
+    placeholders:
+      board:
+        name: 例：「行きたい場所」「レシピ集」
+      pin:
+        title:   タイトルを追加する
+        note:    ピン留めの説明を追加する
+        link_to: 移動先リンクを追加する
+    prompts:
+      pin:
+        board_id: 選択する

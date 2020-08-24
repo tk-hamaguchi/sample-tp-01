@@ -33,3 +33,25 @@ end
     expect { RePin.find_by!(row) }.not_to raise_error
   end
 end
+
+前提('画像を下記からダウンロードして {string} にピン留めする:') do |string, doc_string|
+  board = Board.find_by!(name: string)
+  path  = 'tmp/upload.jpg'
+
+  URI.open(doc_string) do |io|
+    File.open(path, 'w+b') do |file|
+      file.write io.read
+    end
+  end
+
+  pin = Pin.find_or_create_by!(title: File.basename(path), board: board)
+  pin.image.attach(
+    filename: File.basename(path),
+    io: File.open(path),
+    content_type: Rack::Mime::MIME_TYPES[File.extname(path)]
+  )
+end
+
+前提('下記のリピンが登録されていること:') do |table|
+  RePin.create!(table.hashes)
+end

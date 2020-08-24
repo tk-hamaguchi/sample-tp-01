@@ -1,2 +1,18 @@
-<h1>Boards#index</h1>
-<p>Find me in app/views/boards/index.html.erb</p>
+<div class="row" id="main">
+  <% @boards.each do |board| %>
+    <div class="col-3" style="min-width: 400px" id="board-<%= board.id %>">
+      <%= link_to board_path(board), class: 'text-decoration-none text-body' do %>
+        <% image = (board.pins + board.re_pins.map(&:pin)).map(&:image).first %>
+        <% if image %>
+          <%= image_tag image, style: 'width: 350px; height: 200px; object-fit: cover; border-radius: 15px' %>
+        <% else %>
+          <img src="https://fakeimg.pl/350x200/?text=NO IMAGE" style="border-radius: 15px;">
+        <% end %>
+        <h2>
+          <%= board.name %>
+        </h2>
+        <%= t '.count_of', name: Pin.model_name.human, value: board.pins.count + board.re_pins.count %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

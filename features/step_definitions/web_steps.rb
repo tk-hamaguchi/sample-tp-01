@@ -84,3 +84,68 @@ end
 ならば('{string} ボタンが表示されている') do |string|
   expect(page).to have_button string
 end
+
+前提('アップロードする画像を下記からダウンロードしておく:') do |doc_string|
+  URI.open(doc_string) do |io|
+    File.open('tmp/upload.jpg', 'w+b') do |file|
+      file.write io.read
+    end
+  end
+end
+
+もし('ユーザーがピンの作成ボタンをクリックする') do
+  click_button 'addPinButton'
+end
+
+ならば('ピンの作成ページが表示されている') do
+  expect(page).to have_current_path new_pin_path, ignore_query: true
+end
+
+もし('保存先のボードとして {string} を選択する') do |string|
+  select string, from: 'pin[board_id]'
+end
+
+もし('事前にダウンロードした画像ファイルをアップロードする') do
+  attach_file('pin[image]', 'tmp/upload.jpg', make_visible: true)
+end
+
+ならば('ピン[{int}]の詳細ページが表示されている') do |int|
+  expect(page).to have_current_path pin_path(id: int), ignore_query: true
+end
+
+ならば('アップロードした画像が表示されている') do
+  file_name = File.basename(page.find('img')[:src])
+  expect('upload.jpg').to include file_name
+end
+
+もし('ユーザーが {string} メニューをクリックする') do |string|
+  within '.navbar' do
+    click_link string
+  end
+end
+
+ならば('ボード一覧ページが表示されている') do
+  expect(page).to have_current_path boards_path, ignore_query: true
+end
+
+ならば('{string} が表示されていない') do |string|
+  expect(page).not_to have_content string
+end
+
+ならば('ボード[{int}]の領域に {string} が表示されている') do |int, string|
+  within "#board-#{int}" do
+    expect(page).to have_content string
+  end
+end
+
+もし('{string} をクリックする') do |string|
+  click_on string
+end
+
+ならば('ボード[{int}]の詳細ページが表示されている') do |int|
+  expect(page).to have_current_path board_path(id: int), ignore_query: true
+end
+
+ならば('ピン留め[{int}]の画像が表示されている') do |int|
+  expect(page).to have_selector "img[src$=\"#{URI.parse(url_for(Pin.find(int).image)).path}\"]"
+end

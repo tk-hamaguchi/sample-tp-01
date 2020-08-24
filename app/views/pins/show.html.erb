@@ -1,0 +1,30 @@
+<%= render partial: 'commons/create_pin_dropdown' %>
+
+<div class="fixed-top text-left p-3 mt-5 pt-5">
+  <%= link_to root_path, class: 'shadow btn btn-light badge-pill' do %>
+    <%= octicon 'arrow-left' %>
+  <% end %>
+</div>
+
+<div class="card mx-auto mt-4" style="width: 800px;">
+  <div class="row no-gutters">
+    <div class="col-md-6">
+      <%= image_tag @pin.image, class: 'card-img' %>
+    </div>
+    <div class="col-md-6">
+      <% if @pin.link_to %>
+        <p class="card-text">
+          <%= link_to @pin.link_to %>
+        </p>
+      <% end %>
+      <div class="card-body">
+        <h5 class="card-title">
+          <%= @pin.title %>
+        </h5>
+        <p class="card-text">
+          <%= @pin.note %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

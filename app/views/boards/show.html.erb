@@ -1,2 +1,27 @@
-<h1>Boards#show</h1>
-<p>Find me in app/views/boards/show.html.erb</p>
+
+<h1 class="text-center">
+  <%= @board.name %>
+</h1>
+
+<div id="main">
+  <%= render partial: 'commons/create_pin_dropdown' %>
+
+  <div class="fixed-top text-left p-3 mt-5 pt-5">
+    <ul style="list-style: none" class="pl-0">
+      <li>
+        <%= link_to root_path, class: 'shadow btn btn-light badge-pill' do %>
+          <%= octicon 'arrow-left' %>
+        <% end %>
+      </li>
+
+    </ul>
+  </div>
+
+  <%- (@board.pins + @board.re_pins.map(&:pin)).each_with_index do |pin, i| -%>
+    <%= link_to pin_path(pin) do %>
+      <%= image_tag pin.image, style: 'width: 230px ; border-radius: 15px; margin-bottom: 20px' %>
+    <% end %>
+  <%- end -%>
+</div>
+
+<%= javascript_pack_tag 'resize_column_count' %>

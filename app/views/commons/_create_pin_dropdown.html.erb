@@ -1,0 +1,11 @@
+<div class="dropdown dropleft fixed-bottom text-right p-3">
+  <button class="shadow btn btn-light badge-pill" type="button" id="addPinButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <%= octicon 'plus' %>
+  </button>
+  <div class="dropdown-menu" aria-labelledby="addPinButton">
+    <%= link_to new_pin_path, class: 'dropdown-item' do %>
+      <%= octicon 'plus' %>
+      <%= t '.create_pin' %>
+    <% end %>
+  </div>
+</div>
